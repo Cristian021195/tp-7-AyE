@@ -3,11 +3,11 @@ TDA/ADT AB(ITEM)
 SINTAXIS
     ABVACIO : --> AB
     ARMARAB : AB X ITEM X AB --> AB
-    ESABVACIO : AB --> BOOLEAN
+    ESABVACIO : AB --> BOOL
     IZQUIERDO : AB --> AB
     RAIZ : AB --> ITEM U {indefinido}
     DERECHO : AB --> AB
-    PERTENECE : AB X ITEM --> BOOLEAN
+    PERTENECE : AB X ITEM --> BOOL
 
 SEMANTICA: ∀ izq,der ∈ AB, ∀ x,y ∈ ITEM
     ESARBOLVACIO(ARBOLVACIO) ≡ TRUE
@@ -21,3 +21,35 @@ SEMANTICA: ∀ izq,der ∈ AB, ∀ x,y ∈ ITEM
     DERECHO(ARMARAB(izq,x,der)) ≡ der
     PERTENECE(ABVACIO,y) ≡ FALSE
     PERTENECE(ARMARAB(izq,x,der),y) ≡ x=y OR PERTENECE(izq,y) OR PERTENECE(der,y)
+
+FN ARBOL_DE_EXPRESION(EP): PILA -> AB
+    PAUX: PAUX ∈ PILA
+    ACT, ANT: ABAUX ∈ AB
+
+    MIENTRAS(TOP(EP) <> '=') HACER
+        SI(TOP(EP) = '+' OR TOP(EP) = '-') ENTONCES
+            ACT = TOP(PAUX)
+            POP(PAUX)
+            ANT = TOP(PAUX)
+            POP(PAUX)
+
+            PUSH( PAUX( ARMARAB( ANT, TOP(EP), ACT ) ) )
+            POP(EP)
+
+        SINO SI(TOP(EP) = '*' OR TOP(EP) = '/') ENTONCES
+            ACT = TOP(PAUX)
+            POP(PAUX)
+            ANT = TOP(PAUX)
+            POP(PAUX)
+
+            PUSH( PAUX( ARMARAB( ANT, TOP(EP), ACT ) ) )
+            POP(EP)
+
+        SINO SI(TOP(EP) = '=') ENTONCES
+            RETORNA PAUX
+
+        SINO ENTONCES
+            PUSH(PAUX, ARMARAB(ABV,TOP(EP),ABV))
+            POP(EP)
+
+FIN    
