@@ -1,0 +1,23 @@
+TDA/ADT AB(ITEM)
+
+SINTAXIS
+    ABVACIO : --> AB
+    ARMARAB : AB X ITEM X AB --> AB
+    ESABVACIO : AB --> BOOLEAN
+    IZQUIERDO : AB --> AB
+    RAIZ : AB --> ITEM U {indefinido}
+    DERECHO : AB --> AB
+    PERTENECE : AB X ITEM --> BOOLEAN
+
+SEMANTICA: ∀ izq,der ∈ AB, ∀ x,y ∈ ITEM
+    ESARBOLVACIO(ARBOLVACIO) ≡ TRUE
+    ESABVACIO(ABVACIO) ≡TRUE
+    ESABVACIO(ARMARAB(izq,x,der)) ≡ FALSE
+    IZQUIERDO(ABVACIO) ≡ ABVACIO
+    IZQUIERDO(ARMARAB(izq,x,der)) ≡ izq
+    RAIZ(ABVACIO) ≡ indefinido
+    RAIZ(ARMARAB(izq,x,der)) ≡ x
+    DERECHO(ABVACIO) ≡ ABVACIO
+    DERECHO(ARMARAB(izq,x,der)) ≡ der
+    PERTENECE(ABVACIO,y) ≡ FALSE
+    PERTENECE(ARMARAB(izq,x,der),y) ≡ x=y OR PERTENECE(izq,y) OR PERTENECE(der,y)
