@@ -3,7 +3,7 @@
 #define INDEF -9999;
 
 
-typedef int ITEM;
+typedef char ITEM;
 typedef struct ELEMENTO{
     ITEM dato;
     struct ELEMENTO * siguiente;
@@ -28,6 +28,7 @@ int ESSIMETRICA(PILA P);
 PILA INVERTIRLISTA(PILA P); // como usuario
 int INCLUIDA(PILA P1, PILA P2); // como usuario
 int ESPILAVACIA(PILA P);
+void LISTAR(PILA P);
 
 
 int ESPILAVACIA(PILA P){
@@ -38,7 +39,7 @@ void LISTAR(PILA P){
     printf("\n");
     while (P.cabecera != NULL)
     {
-        printf("[%d]", P.cabecera->dato);
+        printf("[%c]", P.cabecera->dato);
         P.cabecera = P.cabecera->siguiente;
     }
     
@@ -140,7 +141,7 @@ PILA PUSHF(PILA P, ITEM I){
 }
 
 void PILAVACIA(PILA *P){
-    P = NULL;
+    P->altura = 0; P->cabecera = NULL;    
 }
 
 

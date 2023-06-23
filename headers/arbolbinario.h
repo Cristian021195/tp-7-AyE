@@ -79,15 +79,16 @@ void PREORDEN(AB A){
 }
 void ENORDEN(AB A){
     if(A != NULL){
-        PREORDEN(A->izq);
+        ENORDEN(A->izq);
         printf("%c, ", A->raiz);
-        PREORDEN(A->der);
+        ENORDEN(A->der);
     }
 }
 void POSORDEN(AB A){
     if(A != NULL){
-        PREORDEN(A->izq);        
-        PREORDEN(A->der);
+        POSORDEN(A->izq);        
+        POSORDEN(A->der);
         printf("%c, ", A->raiz);
     }
 }
+
