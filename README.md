@@ -87,13 +87,19 @@ Si T contiene **un solo nodo**, (Raíz) entonces ese nodo constituye el listado 
 - Listado postorden ≡ < i, d, e, b, j, k, f, g, l, h, c, a >
 - Listado por nivel ≡ < a, b, c, d, e, f, g, h, i, j, k, l >
 
+Una pequeña regla puede ser la siguiente:\
+    - ***PRE:*** **(r)**, izq, der\
+    - ***EN:*** izq, **(r)**, der\
+    - ***POS:*** izq, der, **(r)**\
+La clave es que siempre recorramos recursivamente lo mas profundo posible ya sea ***izq*** o  ***der*** respetando es dicha recursividad la impresion de ***(r) raiz***.
+
 ---
  
 ### TDA/ADT ARBOL(ITEM)
 
 #### SINTAXIS
 - ARBOLVACIO : &rarr; ARBOL
-- ESARBOLVACIO : ARBOL &rarr; BOOLEAN
+- ESARBOLVACIO : ARBOL &rarr; BOOL
 - CONSTRUIR : ITEM X ARBOL X ARBOL &rarr; ARBOL
 - PRIMERHIJO : ARBOL &rarr; ARBOL
 - PROXHERMANO : ARBOL &rarr; ARBOL
@@ -123,11 +129,11 @@ está compuesto de una raíz y dos subárboles binarios llamados subárbol izqui
 #### SINTAXIS
 - ABVACIO : &rarr; AB
 - ARMARAB : AB X ITEM X AB &rarr; AB
-- ESABVACIO : AB &rarr; BOOLEAN
+- ESABVACIO : AB &rarr; BOOL
 - IZQUIERDO : AB &rarr; AB
 - RAIZ : AB &rarr; ITEM U {indefinido}
 - DERECHO : AB &rarr; AB
-- PERTENECE : AB X ITEM &rarr; BOOLEAN
+- PERTENECE : AB X ITEM &rarr; BOOL
 
 #### SEMANTICA: ∀ izq,der ∈ AB, ∀ x,y ∈ ITEM
 - ESARBOLVACIO(ARBOLVACIO) ≡ TRUE
@@ -149,3 +155,38 @@ está compuesto de una raíz y dos subárboles binarios llamados subárbol izqui
 - Listado preorden ≡ < A, B, D, E, H, J, I, C, F, G >
 - Listado enorden ≡ < D, B, H, J, E, I, A, F, G, C >
 - Listado postorden ≡ < D, J, H, I, E, B, G, F, C, A >
+
+#### ALGORITMOS Y PROCEDIMIENTOS DE ORDEN
+> Procedimiento PRE-ORDEN( T ): AB
+- PRE-ORDEN( T ): AB\
+    - SI NO ESABVACIO(T) ENTONCES\
+	    - ESCRIBIR  RAIZ(T)\
+	    - PRE-ORDEN( IZQUIERDO(T) )\
+	    - PRE-ORDEN( DERECHO(T) )\
+
+> Procedimiento EN-ORDEN( T ): AB
+- EN-ORDEN( T ): AB\
+    - SI NO ESABVACIO(T) ENTONCES\
+	    - EN-ORDEN( IZQUIERDO(T) )
+	    - ESCRIBIR  RAIZ(T)
+	    - EN-ORDEN( DERECHO(T) )
+
+> Procedimiento POS-ORDEN( T ): AB
+- POS-ORDEN( T ): AB
+    - SI NO ESABVACIO(T) ENTONCES
+	    - POS-ORDEN( IZQUIERDO(T) )
+	    - POS-ORDEN( DERECHO(T) )
+	    - ESCRIBIR  RAIZ(T)
+
+
+El arbol binario se arma desde las hojas, de manera recursiva, por ejemplo:
+Tomando las constructoras ABVACIO ABV() y ARMARAB: AB X ITEM X AB (AAB)
+
+        ├── ABV
+    ├── (C)
+        ├── (F)
+            ├── (H)
+            ├── (I)
+    //ramificacion para abajo es hacia izquierda, hacia arriba es derecha
+
+> Si queremos representar el siguiente arbol usando las constructoras, seria asi: AAB(AAB(AAB(ABV, H, ABV), F, AAB(ABV, I, ABV)), C, ABV)
