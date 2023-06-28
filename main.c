@@ -7,7 +7,7 @@ AB ARBOL_DE_EXPRESION(char ep[], int n);
 
 int main(){
     char ep[8] = {'a','b','c','+','*','d','/','='};
-    /*PILA P; PILAVACIA(&P); // [fnd - top]
+    /*PILA P; PILAVACIA(&P); // [fnd - top] 
     P = PUSH(P,'a'); P = PUSH(P,'b'); P = PUSH(P,'c'); P = PUSH(P,'+');
     P = PUSH(P,'*'); P = PUSH(P,'d'); P = PUSH(P,'/'); P = PUSH(P,'=');*/
     AB B = ABVACIO();   B = ARMARAB(NULL, 'B', NULL);
